@@ -1,0 +1,12 @@
+[Unit]
+Description=Reverse ssh tunnel
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ssh -NTC -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -i /root/.ssh/id_rsa someuser@somehost.com -R "*:remoteport:*:localport"
+Type=simple
+RestartSec=3
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
